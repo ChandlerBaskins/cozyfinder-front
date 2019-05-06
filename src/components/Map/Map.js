@@ -51,25 +51,30 @@ class Map extends React.Component {
 
     }
 
-    componentWillUpdate() {
+    componentDidUpdate(prevProps) {
 
-        let {latitude, longitude} = this.state
+// when the button is clicked the response is recieved and the 
+//state should be updated with the coordinates of the response
+
+
+        // let {latitude, longitude} = this.state
 
         let lat = this.props.lat
-        let long = this.props.long
+        // let long = this.props.long
 
 
-        if(latitude != lat) {
+        if(prevProps === this.props.lat) {
+           
+         this.setState({latitude: lat})
 
-
-            this.setState({latitude: lat})
-            this.setState({longitude: long})
+            // // this.setState({latitude: lat})
+            // // this.setState({longitude: long})
 
             //setstate not working
 
 
-            console.log('map', this.state)
-            console.log('props', this.props.long, long)
+            // console.log('map', this.state)
+            // console.log('props', this.props.long, long)
 
         }
 

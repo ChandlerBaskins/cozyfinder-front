@@ -80,6 +80,7 @@ class App extends Component {
 
     };
 
+
     async searchButton() {
 
         /** When the button clicked it back end sends all the neighbourhood data of New York. If any of the
@@ -89,6 +90,7 @@ class App extends Component {
 
         const response = await fetch('http://localhost:3000/search/new york');
         const data = await response.json();
+        console.log(data);
 
 
         for(let i=0; i<data['resultList'].length; i++){
@@ -97,15 +99,28 @@ class App extends Component {
                 const long = data['resultList'][i]['longitude']['_text']
 
                 console.log(data['resultList'][i]['name']['_text'], lat, long)
+                
+                this.setState((state) => {
+                    latitude: lat
+                })
 
-
-                this.setState({latitude: lat})
-                this.setState({longitude: long})
+                // this.setState({latitude: lat})
+                // this.setState({longitude: long})
             }
             //console.log(data['resultList'][i]['name']['_text'])     //listing all the New York neighbourhoods name
         }
         console.log(this.state)
 
+    }
+
+    componentDidUpdate(prevProps) {
+        let long = this.state.longitude
+        let lat = this.state.latitude
+        console.log(long)
+        console.log(lat)
+        // if(prevProps === this.state) {
+        //     this.setState({latitude: long})
+        // }
     }
 
 
